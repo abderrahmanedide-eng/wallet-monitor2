@@ -8,6 +8,19 @@ import os
 import traceback
 from threading import Thread
 
+
+# Keep-alive pour Render Worker
+def keep_render_alive():
+    """Empêche Render de tuer le worker"""
+    while True:
+        print(f"💚 Render Worker Alive - {time.strftime('%Y-%m-%d %H:%M:%S')}")
+        time.sleep(300)  # Toutes les 5 minutes
+
+# Démarrer en arrière-plan
+import threading
+threading.Thread(target=keep_render_alive, daemon=True).start()
+
+# [VOTRE CODE EXISTANT...]
 # -----------------------------
 # CONFIGURATION LOGGING
 # -----------------------------
@@ -736,3 +749,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
